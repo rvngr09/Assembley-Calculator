@@ -1,7 +1,7 @@
 .MODEL SMALL  
 .STACK 100H   
  
- ;EXTERN dectobin2:FAR
+
 .DATA       
     buffer DB 6  ; Buffer for user input (max 5 digits + null terminator)
     op DW ?      
