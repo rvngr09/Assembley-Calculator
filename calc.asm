@@ -200,7 +200,7 @@ JUMP_MULTIPLICATION:
     JMP MULTIPLICATION 
 JUMP_DIVISION:
     JMP DIVISION
-;------------------------------------------------------------------------------------------------------
+
 JUMP_AND:
     JMP AND_OP
 JUMP_OR:
@@ -361,7 +361,7 @@ OP:
     
     
     
-    ;-------------------------------------------- ykhrg or ywli mn lwl
+    
     ; Ask the user to continue or exit
     MOV DX, OFFSET msg 
     MOV AH, 09H
@@ -568,7 +568,7 @@ DIVISION:
     JE bin6
     CMP buffer , '2'
     JE hex6
-bin6:;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+bin6:
     MOV [conversion_type], 4    
     MOV AH, 09H
     LEA DX, prompt_bin_to_dec
@@ -603,7 +603,7 @@ OP6:
     INT 21H
     
 
-;------------------------------- 2 EME LECTURE
+
     ; Read operand 2
      
     CMP buffer , '1'
@@ -699,7 +699,7 @@ OP5:
 
     MOV AH, 01H  ; Wait for key press
     INT 21H      
-    ;-------------------------------------------- ykhrg or ywli mn lwl
+    
     ; Ask the user to continue or exit
       
 
@@ -884,7 +884,6 @@ call PrintColorText
     MOV AH, 4CH
     INT 21H 
         JMP EXIT_PROMPT
-        ; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ l9wayd a jdd
 AND_OP:
     MOV DX, OFFSET newline 
     MOV AH, 09H
