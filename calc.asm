@@ -182,7 +182,7 @@ CALCUL:
     JE SUBTRACTION
     CMP buffer, '/'  ; Check for division operator
     JE JUMP_DIVISION 
-    ;-------------------------------------------------------------------------------------- and or xor ... selection
+    ;-------------------------------------------------------------------------------------- and  ... selection
     CMP buffer, '&'
     JE JUMP_AND
     CMP buffer, '|'
