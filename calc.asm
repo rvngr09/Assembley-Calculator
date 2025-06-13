@@ -154,15 +154,9 @@ JUMP_INV:
     MOV AH, 09H
     INT 21H
     JMP START
-    
-    
-     
-    
-   
+
 CALCUL:
-    
-    
-    
+
     ; Prompt for operation
     MOV DX, OFFSET prompt
     MOV AH, 09H
@@ -182,7 +176,7 @@ CALCUL:
     JE SUBTRACTION
     CMP buffer, '/'  ; Check for division operator
     JE JUMP_DIVISION 
-    ;-------------------------------------------------------------------------------------- and  ... selection
+
     CMP buffer, '&'
     JE JUMP_AND
     CMP buffer, '|'
@@ -212,13 +206,11 @@ JUMP_NAND:
 JUMP_NOR:
     JMP NOR_OP
 
-    
     ; If invalid, print error message and restart
     MOV si, OFFSET inv
     mov bl, 0Ch             ; Light red (0Ch) for errors
 call PrintColorText
     JMP START 
-    
     
 SUBTRACTION:
     ; Print "SUBTRACTION SELECTED!" in yellow
@@ -334,10 +326,6 @@ OP:
     MOV con, AX
     CALL PrintNumber3
     
-    ; Print newlines
-   
-    
-    
     ; Print newline
     MOV DX, OFFSET newline
     MOV AH, 09H
@@ -357,11 +345,7 @@ OP:
     pushf
     pop ax
     CALL check_flags
-    
-    
-    
-    
-    
+
     ; Ask the user to continue or exit
     MOV DX, OFFSET msg 
     MOV AH, 09H
@@ -382,9 +366,6 @@ JUMP_SKIP3:
     ; Print the result
     MOV AX, operation
     CALL PrintNumber 
-
-
-
 
 ADDITION:
     ; Print "ADDITION SELECTED!"
@@ -585,7 +566,6 @@ hex6:
     CALL hex_to_dec2
     
     jmp OP6
-    
    
 deci6:
     CALL ReadNumber
@@ -602,10 +582,7 @@ OP6:
     MOV AH, 09H   
     INT 21H
     
-
-
     ; Read operand 2
-     
     CMP buffer , '1'
     JE deci5
     CMP buffer , '3'
@@ -687,11 +664,9 @@ OP5:
     ; Check each flag and store '1' or '0' in flag_values
     mov cx, 9  ; Number of flags to check
     lea si, flag_values  ; Pointer to flag storage
-    
+   
     CALL check_flags
- 
-    
-    
+
     ; Ask the user to continue or exit
     MOV DX, OFFSET msg
     MOV AH, 09H
@@ -710,7 +685,6 @@ OP5:
     CMP AL, 'q'  ; Check if user wants to exit
     JE JUMP_SKIP1
     JMP START    ; Repeat the program
-    ;------------------------------------------
       
 JUMP_SKIP1:
     JMP EXIT_PROGRAM
@@ -739,8 +713,6 @@ MULTIPLICATION:
     INT 21H  
 
     ; Read operand 1
-    
-      
     CMP buffer , '1'
     je deci7
     CMP buffer , '3'
@@ -763,7 +735,6 @@ hex7:
     CALL hex_to_dec2
     
     jmp OP7
-    
    
 deci7:
     CALL ReadNumber
@@ -777,7 +748,6 @@ OP7:
     MOV AH, 09H   
     INT 21H    
 
-;------------------------------- 2 EME LECTURE
     ; Read operand 2
      
     CMP buffer , '1'
@@ -852,8 +822,6 @@ OP8:
     pop ax
     CALL check_flags
     
-    
-    
     ; Ask the user to continue or exit
     MOV DX, OFFSET msg
     MOV AH, 09H
@@ -862,14 +830,11 @@ OP8:
     MOV AH, 01H  ; Wait for key press
     INT 21H  
         
-    ;-------------------------------------------- ykhrg or ywli mn lwl
-      
     CMP AL, 'Q'  ; Check if user wants to exit
     JE JUMP_SKIP2
     CMP AL, 'q'  ; Check if user wants to exit
     JE JUMP_SKIP2
     JMP START    ; Repeat the program
-    ;------------------------------------------
       
 JUMP_SKIP2:
     JMP EXIT_PROGRAM
@@ -894,9 +859,7 @@ AND_OP:
     MOV DX, OFFSET newline 
     MOV AH, 09H
     INT 21H
-      
-
-
+     
     call ReadOperands
     mov ax, op
     and ax, op2
@@ -935,7 +898,6 @@ XOR_OP:
     MOV AH, 09H
     INT 21H
         
-
     CALL ReadOperands
 
     MOV AX, op  
@@ -955,7 +917,6 @@ NAND_OP:
     MOV AH, 09H
     INT 21H
         
-
     CALL ReadOperands
 
     MOV AX, op  
@@ -976,7 +937,6 @@ NOR_OP:
     MOV AH, 09H
     INT 21H
         
-
     CALL ReadOperands
 
     MOV AX, op  
@@ -1110,11 +1070,9 @@ BINARY_SELECTED:
     CALL FAR PTR dectobin
     JMP START
  
-
 HEXADECIMAL_SELECTED:
     ; Print "HEXADECIMAL SELECTED!"
     
-      
     JMP PRINT_RESULT_HEXADECIMAL2
 
 PRINT_RESULT_DECIMAL:
@@ -1129,7 +1087,6 @@ PRINT_POSITIVE_DECIMAL:
     CALL PrintNumber
     JMP EXIT_PROMPT
 
-
 PRINT_POSITIVE_BINARY:
     ; Print the result in binary
     MOV AX, operation
@@ -1139,20 +1096,17 @@ PRINT_POSITIVE_BINARY:
 PRINT_RESULT_HEXADECIMAL:
     CALL hex_to_dec
     
-    
     JMP EXIT_PROMPT
 PRINT_RESULT_HEXADECIMAL2:
     CALL hex2bin
     
     JMP EXIT_PROMPT
  
-
 PRINT_POSITIVE_HEXADECIMAL:
     ; Print the result in hexadecimal
     MOV AX, operation
     ;CALL PrintHexadecimal
     JMP EXIT_PROMPT
-    
     
 INVALID_INPUT:
     ; Display invalid message
@@ -1264,12 +1218,10 @@ next_bit89:
     ; Print the binary result
     MOV si, OFFSET binary
     
-    
     mov bl, 0AH             ; Light green (0Ah) for success
     call PrintColorText
     ; Print a newline
     
-
     ; Return to the caller
     RET
 dectobin5 ENDP
@@ -1314,8 +1266,7 @@ next_bit8:
 
     ; Print the binary result
     MOV si, OFFSET binary
-    
-    
+   
     mov bl, 0Eh             ; Light green (0Ah) for success
     call PrintColorText
     ; Print a newline
@@ -1327,14 +1278,12 @@ next_bit8:
     RET
 dectobin3 ENDP
     
-    
 dectobin PROC
     MOV si, OFFSET bin_result_msg
     mov bl, 0Ah             ; Light green (0Ah) for success
     call PrintColorText 
     MOV AX, operation
    
-
     ; Point to the last position in the binary array
     LEA SI, binary + 15
 
@@ -1369,7 +1318,6 @@ next_bit:
     ; Print the binary result
     MOV si, OFFSET binary
     
-    
     mov bl, 0Ah             ; Light green (0Ah) for success
     call PrintColorText
     ; Print a newline
@@ -1381,11 +1329,8 @@ next_bit:
     RET
 dectobin ENDP
 
-
-
 dectobin2 PROC
     
-
     MOV DX, OFFSET newline
     MOV AH, 09H
     INT 21H
@@ -1451,10 +1396,6 @@ hex2bin PROC
  
     RET
 hex2bin ENDP
-
-
-
-
 ;------------------------------------------------------------
 ; PrintNumber: Converts integer (AX) to ASCII and prints it
 ;------------------------------------------------------------  
@@ -1479,11 +1420,10 @@ PrintNumber20E PROC
     INT 10h
     POP BX
     POP AX
-    
     ; --- Convert digits (store on stack) ---
     XOR CX, CX      ; Digit counter = 0
     MOV BX, 10      ; Divisor
-    
+
 ConvertLoop:
     XOR DX, DX
     DIV BX          ; AX = quotient, DX = remainder
@@ -2199,7 +2139,7 @@ INVALID_BIN:
     STC                       ; Set carry (error)
     RET
 BINARY_TO_HEX ENDP
-;BBBBBBBBBBBBBBBBBBBBBBBBBBBBBIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNN TO DDDDDDDDDDDIIIIIIIIIIIIIICCCCCCCCCCCCCCCC
+
 BINARY_TO_DEC PROC
     PUSH BX
     PUSH CX
@@ -2432,10 +2372,6 @@ Done3:
     RET
     PrintHex0E ENDP
 
-
-
-
- 
 CLEAR_SCREEN PROC
     PUSH AX 
     PUSH BX
@@ -2541,10 +2477,6 @@ DisplayOperand PROC
     
     RET
 DisplayOperand ENDP
-
-
-
-
 
 ; Enhanced PrintColorText that automatically restores default color when done
 PrintColorText PROC
